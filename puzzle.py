@@ -13,7 +13,7 @@ Description: 	Implement the A* search algorithm
 import sys
 from heapq import heapify, heappush, heappop    # Heap data structure for priority queue
 
-# Third-Party Libraries
+# Custom Libraries
 import Node										# Node data structure
 
 
@@ -58,7 +58,7 @@ def expand(node):
 # Search
 def search(ini_state, goal_state):
 	# Initialize Root Node
-	node = Node.Node(0, manhattan(ini_state, goal_state), ini_state)
+	node = Node.Node(0, 0, manhattan(ini_state, goal_state), ini_state)
 
 	# Initialize frontier
 	frontier = [node]
@@ -69,7 +69,7 @@ def search(ini_state, goal_state):
 
 	# Start Search from Frontier
 	while len(frontier) > 0:
-		next_node = frontier.pop()
+		next_node = heappop(frontier)
 
 		# If Goal Node is found
 		if next_node.state == goal_state:
