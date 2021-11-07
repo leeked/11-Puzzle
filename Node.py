@@ -7,3 +7,6 @@ class Node:
 		self.depth = depth
 		self.path_cost = path_cost
 		self.state = state
+
+	def __lt__(self, other):
+		return self.path_cost < other.path_cost
