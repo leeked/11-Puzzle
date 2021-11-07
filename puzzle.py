@@ -1,14 +1,33 @@
 # Standard Libraries
-import sys	
-from heapq import heapify, heappush, heappop	# Heap data structure for priority queue			
+import sys
+from heapq import heapify, heappush, heappop    # Heap data structure for priority queue
 
 # Third-Party Libraries
 import Node										# Node data structure
 
 
 # Heuristic
-def manhattan(state):
-	pass
+def manhattan(curr_state, goal_state):
+	mdist = 0
+
+	# Iterate Through curr_state
+	for i in range(len(curr_state)):
+
+		# Iterate Through goal_state to Find Match
+		for j in range(len(goal_state)):
+
+			# When Match is Found, Calculate Manhattan Distance
+			if curr_state[i] == goal_state[j]:
+				x1 = i // 4
+				y1 = i % 4
+
+				x2 = j // 4
+				y2 = j % 4
+
+				# Add to Total mdist
+				mdist += abs(x2 - x1) + abs(y2 - y1)
+
+	return mdist
 
 
 # Expand
@@ -19,7 +38,7 @@ def expand():
 # Search
 def search(ini_state, goal_state):
 	# Initialize Root Node
-	node = Node.Node(0, manhattan(ini_state), ini_state)
+	node = Node.Node(0, manhattan(ini_state, goal_state), ini_state)
 
 	# Initialize frontier
 	frontier = [node]
@@ -40,9 +59,12 @@ def search(ini_state, goal_state):
 		for child in expand(next_node):
 			s = child.state
 
+			# Check if Already Visited
 			if s not in visited or child.path_cost < visited[s].path_cost:
 				visited[s] = child
-				heappush(frontier, (child.path_cost, child))
+				heappush(frontier, child)
+
+	return None
 
 
 # Main
@@ -72,7 +94,7 @@ def main():
 		count_line += 1
 
 	# Start Search
-	search(ini_state, goal_state)
+	#search(ini_state, goal_state)
 
 
 if __name__ == "__main__":
