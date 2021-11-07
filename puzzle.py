@@ -166,12 +166,9 @@ def main():
 
 	for line in lines:
 		if count_line >= 3:
-			if count_line == 3:
-				pass
-			else:
-				goal_state.extend([int(n) for n in line.split(' ')])
+			goal_state.extend([int(n) for n in line.split(' ') if n != '\n'])
 		else:
-			ini_state.extend([int(n) for n in line.split(' ')])
+			ini_state.extend([int(n) for n in line.split(' ') if n != '\n'])
 		count_line += 1
 
 	# Start Search
