@@ -11,6 +11,7 @@ Description: 	Implement the A* search algorithm
 
 # Standard Libraries
 import sys
+import copy
 from heapq import heapify, heappush, heappop    # Heap data structure for priority queue
 
 # Custom Libraries
@@ -68,11 +69,45 @@ def expand_actions(state):
 	return poss_actions
 
 
+# Create new state based on action
+def result(state, action):
+	new_s = copy.deepcopy(state)
+
+	# Find index of blank
+	ind = 0
+
+	for i in range(len(state)):
+		if state[i] == 0:
+			ind = i
+
+	# Perform action
+	if action == 'L':
+		new_s[ind] = new_s[ind - 1]
+		new_s[ind - 1] = 0
+
+	elif action == 'R':
+		new_s[ind] = new_s[ind + 1]
+		new_s[ind + 1] = 0
+
+	elif action == 'U':
+		new_s[ind] = new_s[ind - 4]
+		new_s[ind - 4] = 0
+
+	elif action == 'D':
+		new_s[ind] = new_s[ind + 4]
+		new_s[ind + 4] = 0
+
+	return new_s
+
+
 # Returns all possible children of given node
 def expand(node):
 	s = node.state
 
+	for action in expand_actions(s):
+		new_s = result(s, action)
 
+		
 
 
 # Search
