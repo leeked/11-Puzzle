@@ -101,13 +101,19 @@ def result(state, action):
 
 
 # Returns all possible children of given node
-def expand(node):
-	s = node.state
+def expand(parent, goal_state):
+	s = parent.state
 
+	# Create nodes from all possible actions
 	for action in expand_actions(s):
-		new_s = result(s, action)
 
-		
+		# Determine the attributes of each child
+		new_depth = parent.depth + 1
+		gn = parent.path_cost + 1
+		new_s = result(s, action)
+		fn = gn + manhattan(new_s, goal_state)
+
+		yield Node.Node(new_depth, gn, fn, new_s, parent, action)
 
 
 # Search
@@ -131,7 +137,7 @@ def search(ini_state, goal_state):
 			return next_node
 
 		# Expand children
-		for child in expand(next_node):
+		for child in expand(next_node, goal_state):
 			s = child.state
 
 			# Check if already visited
