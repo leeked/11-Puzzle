@@ -45,10 +45,30 @@ def manhattan(curr_state, goal_state):
 def expand_actions(state):
 	poss_actions = []
 
+	# Find index of blank
+	ind = 0
+
+	for i in range(len(state)):
+		if state[i] == 0:
+			ind = i
+
+	# Determine possible actions
+	if ind % 4 != 0:
+		poss_actions.append('L')
+
+	if ind % 4 != 3:
+		poss_actions.append('R')
+
+	if ind > 3:
+		poss_actions.append('U')
+
+	if ind < 8:
+		poss_actions.append('D')
+
+	return poss_actions
 
 
-
-# Expand
+# Returns all possible children of given node
 def expand(node):
 	s = node.state
 
