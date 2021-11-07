@@ -1,3 +1,14 @@
+"""
+CS-UY 4613
+Project 1: 11-Puzzle Problem
+
+Author: Kevin Lee (KL3642)
+
+Description: 	Implement the A* search algorithm
+				with graph search for solving the 11-puzzle problem.
+"""
+
+
 # Standard Libraries
 import sys
 from heapq import heapify, heappush, heappop    # Heap data structure for priority queue
@@ -10,13 +21,13 @@ import Node										# Node data structure
 def manhattan(curr_state, goal_state):
 	mdist = 0
 
-	# Iterate Through curr_state
+	# Iterate through curr_state
 	for i in range(len(curr_state)):
 
-		# Iterate Through goal_state to Find Match
+		# Iterate through goal_state to find match
 		for j in range(len(goal_state)):
 
-			# When Match is Found, Calculate Manhattan Distance
+			# When match is found, calculate Manhattan Distance
 			if curr_state[i] == goal_state[j]:
 				x1 = i // 4
 				y1 = i % 4
@@ -24,15 +35,24 @@ def manhattan(curr_state, goal_state):
 				x2 = j // 4
 				y2 = j % 4
 
-				# Add to Total mdist
+				# Add to total mdist
 				mdist += abs(x2 - x1) + abs(y2 - y1)
 
 	return mdist
 
 
+# Create and return a list of possible actions from given state
+def expand_actions(state):
+	poss_actions = []
+
+
+
+
 # Expand
-def expand():
-	pass
+def expand(node):
+	s = node.state
+
+
 
 
 # Search
@@ -44,22 +64,22 @@ def search(ini_state, goal_state):
 	frontier = [node]
 	heapify(frontier)
 
-	# Initialize Visited Hash Map
+	# Initialize visited Hash Map
 	visited = {}
 
 	# Start Search from Frontier
 	while len(frontier) > 0:
 		next_node = frontier.pop()
 
-		# If Goal Node is Found
+		# If Goal Node is found
 		if next_node.state == goal_state:
 			return next_node
 
-		# Expand Children
+		# Expand children
 		for child in expand(next_node):
 			s = child.state
 
-			# Check if Already Visited
+			# Check if already visited
 			if s not in visited or child.path_cost < visited[s].path_cost:
 				visited[s] = child
 				heappush(frontier, child)
@@ -74,11 +94,11 @@ def main():
 	filename = sys.argv[1]
 	w = sys.argv[2]
 
-	# Open File and Parse Input
+	# Open File and parse input
 	f = open(filename)
 	lines = f.readlines()
 
-	# Grab States
+	# Grab states
 	ini_state = []
 	goal_state = []
 	count_line = 0
@@ -94,7 +114,7 @@ def main():
 		count_line += 1
 
 	# Start Search
-	#search(ini_state, goal_state)
+	# search(ini_state, goal_state)
 
 
 if __name__ == "__main__":
