@@ -141,8 +141,8 @@ def search(ini_state, goal_state):
 			s = child.state
 
 			# Check if already visited
-			if s not in visited or child.path_cost < visited[s].path_cost:
-				visited[s] = child
+			if tuple(s) not in visited or child.path_cost < visited[tuple(s)].path_cost:
+				visited[tuple(s)] = child
 				heappush(frontier, child)
 
 	return None
@@ -175,7 +175,9 @@ def main():
 		count_line += 1
 
 	# Start Search
-	# search(ini_state, goal_state)
+	res = search(ini_state, goal_state)
+
+	print(res)
 
 
 if __name__ == "__main__":
