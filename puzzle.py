@@ -151,6 +151,82 @@ def search(ini_state, goal_state, w):
 	return None, total_num_nodes
 
 
+# Explore solution path and return actions and f(n) along the path
+def find_path(node):
+	sol_path = []
+	fn_vals = []
+
+	# Go up solution path while appending action to sol_path until root
+	curr = node
+	while curr.depth != 0:
+		sol_path.append(curr.action)
+		fn_vals.append(str(curr.total_cost))
+		curr = curr.parent
+
+	# Include root node f(n)
+	fn_vals.append(str(curr.total_cost))
+
+	sol_path.reverse()
+	fn_vals.reverse()
+	return sol_path, fn_vals
+
+
+# Create and write to output file
+def output(ini_state, goal_state, w, goal_node, num_nodes):
+	f = open("output.txt", 'a')
+
+	# Write initial state
+	for i in range(len(ini_state)):
+		f.write(str(ini_state[i]))
+		if i % 4 != 3:
+			f.write(' ')
+		else:
+			f.write('\n')
+
+	f.write('\n')
+
+	# Write goal state
+	for i in range(len(goal_state)):
+		f.write(str(goal_state[i]))
+		if i % 4 != 3:
+			f.write(' ')
+		else:
+			f.write('\n')
+
+	f.write('\n')
+
+	# Write w
+	f.write(str(w) + '\n')
+
+	# Write depth of shallowest goal node
+	if goal_node is None:
+		f.write("FAIL\n")
+	else:
+		f.write(str(goal_node.depth) + '\n')
+
+	# Write the total number of nodes generated
+	f.write(str(num_nodes) + '\n')
+
+	# Write the solution (sequence of actions and f(n) values)
+	if goal_node is None:
+		f.write("FAIL\nFAIL")
+	else:
+		sol_path, fn_vals = find_path(goal_node)
+		for i in range(len(sol_path)):
+			f.write(sol_path[i])
+			if i < len(sol_path) - 1:
+				f.write(' ')
+
+		f.write('\n')
+
+		for i in range(len(fn_vals)):
+			f.write(fn_vals[i])
+			if i < len(fn_vals) - 1:
+				f.write(' ')
+
+	f.close()
+
+
 # Main
 def main():
 
@@ -174,12 +250,12 @@ def main():
 			ini_state.extend([int(n) for n in line.split(' ') if n != '\n'])
 		count_line += 1
 
+	f.close()
 	# Start Search
 	res, num_nodes = search(ini_state, goal_state, w)
 
-	print(manhattan(ini_state,goal_state,w))
-	print(res)
-	print("Total number of nodes: ", num_nodes)
+	# Create and write to output
+	output(ini_state, goal_state, w, res, num_nodes)
 
 
 if __name__ == "__main__":
