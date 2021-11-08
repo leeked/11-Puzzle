@@ -142,7 +142,7 @@ def search(ini_state, goal_state, w):
 			s = child.state
 
 			# Check if already visited
-			if tuple(s) not in visited or child.path_cost < visited[tuple(s)].path_cost:
+			if tuple(s) not in visited or child.total_cost < visited[tuple(s)].total_cost:
 				visited[tuple(s)] = child
 				heappush(frontier, child)
 
