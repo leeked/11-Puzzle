@@ -177,6 +177,7 @@ def main():
 	# Start Search
 	res, num_nodes = search(ini_state, goal_state, w)
 
+	print(manhattan(ini_state,goal_state,w))
 	print(res)
 	print("Total number of nodes: ", num_nodes)
 

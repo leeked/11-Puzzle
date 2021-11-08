@@ -10,7 +10,7 @@ class Node:
         self.state = state
 
     def __lt__(self, other):
-        return self.path_cost < other.path_cost
+        return self.total_cost < other.total_cost
 
     def __repr__(self):
         return "depth = % s , path_cost = % s , total_cost = % s , state = % s , action = % s" % (
