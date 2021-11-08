@@ -120,6 +120,7 @@ def expand(parent, goal_state):
 def search(ini_state, goal_state):
 	# Initialize Root Node
 	node = Node.Node(0, 0, manhattan(ini_state, goal_state), ini_state)
+	total_num_nodes = 1
 
 	# Initialize frontier
 	frontier = [node]
@@ -134,7 +135,7 @@ def search(ini_state, goal_state):
 
 		# If Goal Node is found
 		if next_node.state == goal_state:
-			return next_node
+			return next_node, total_num_nodes
 
 		# Expand children
 		for child in expand(next_node, goal_state):
@@ -145,7 +146,9 @@ def search(ini_state, goal_state):
 				visited[tuple(s)] = child
 				heappush(frontier, child)
 
-	return None
+			total_num_nodes += 1
+
+	return None, total_num_nodes
 
 
 # Main
@@ -172,9 +175,10 @@ def main():
 		count_line += 1
 
 	# Start Search
-	res = search(ini_state, goal_state)
+	res, num_nodes = search(ini_state, goal_state)
 
 	print(res)
+	print("Total number of nodes: ", num_nodes)
 
 
 if __name__ == "__main__":
