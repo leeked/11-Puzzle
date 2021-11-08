@@ -172,7 +172,7 @@ def find_path(node):
 
 
 # Create and write to output file
-def output(ini_state, goal_state, w, goal_node, num_nodes):
+def output(ini_state, w, goal_node, num_nodes):
 	f = open("output.txt", 'a')
 
 	# Write initial state
@@ -186,8 +186,8 @@ def output(ini_state, goal_state, w, goal_node, num_nodes):
 	f.write('\n')
 
 	# Write goal state
-	for i in range(len(goal_state)):
-		f.write(str(goal_state[i]))
+	for i in range(len(goal_node.state)):
+		f.write(str(goal_node.state[i]))
 		if i % 4 != 3:
 			f.write(' ')
 		else:
@@ -255,7 +255,7 @@ def main():
 	res, num_nodes = search(ini_state, goal_state, w)
 
 	# Create and write to output
-	output(ini_state, goal_state, w, res, num_nodes)
+	output(ini_state, w, res, num_nodes)
 
 
 if __name__ == "__main__":
