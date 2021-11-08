@@ -156,7 +156,7 @@ def main():
 
 	# Grab filename and w from stdin
 	filename = sys.argv[1]
-	w = sys.argv[2]
+	w = float(sys.argv[2])
 
 	# Open File and parse input
 	f = open(filename)
