@@ -19,7 +19,7 @@ import Node										# Node data structure
 
 
 # Heuristic
-def manhattan(curr_state, goal_state):
+def manhattan(curr_state, goal_state, w):
 	mdist = 0
 
 	# Iterate through curr_state
@@ -39,7 +39,7 @@ def manhattan(curr_state, goal_state):
 				# Add to total mdist
 				mdist += abs(x2 - x1) + abs(y2 - y1)
 
-	return mdist
+	return mdist * w
 
 
 # Create and return a list of possible actions from given state
@@ -101,7 +101,7 @@ def result(state, action):
 
 
 # Returns all possible children of given node
-def expand(parent, goal_state):
+def expand(parent, goal_state, w):
 	s = parent.state
 
 	# Create nodes from all possible actions
@@ -111,15 +111,15 @@ def expand(parent, goal_state):
 		new_depth = parent.depth + 1
 		gn = parent.path_cost + 1
 		new_s = result(s, action)
-		fn = gn + manhattan(new_s, goal_state)
+		fn = gn + manhattan(new_s, goal_state, w)
 
 		yield Node.Node(new_depth, gn, fn, new_s, parent, action)
 
 
 # Search
-def search(ini_state, goal_state):
+def search(ini_state, goal_state, w):
 	# Initialize Root Node
-	node = Node.Node(0, 0, manhattan(ini_state, goal_state), ini_state)
+	node = Node.Node(0, 0, manhattan(ini_state, goal_state, w), ini_state)
 	total_num_nodes = 1
 
 	# Initialize frontier
@@ -138,7 +138,7 @@ def search(ini_state, goal_state):
 			return next_node, total_num_nodes
 
 		# Expand children
-		for child in expand(next_node, goal_state):
+		for child in expand(next_node, goal_state, w):
 			s = child.state
 
 			# Check if already visited
@@ -175,7 +175,7 @@ def main():
 		count_line += 1
 
 	# Start Search
-	res, num_nodes = search(ini_state, goal_state)
+	res, num_nodes = search(ini_state, goal_state, w)
 
 	print(res)
 	print("Total number of nodes: ", num_nodes)
