@@ -251,6 +251,7 @@ def main():
 		count_line += 1
 
 	f.close()
+	
 	# Start Search
 	res, num_nodes = search(ini_state, goal_state, w)
 
