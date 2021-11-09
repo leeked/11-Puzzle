@@ -5,7 +5,7 @@ Project 1: 11-Puzzle Problem
 Author: Kevin Lee (KL3642)
 
 Description: 	Implement the A* search algorithm
-				with graph search for solving the 11-puzzle problem.
+with graph search for solving the 11-puzzle problem.
 """
 
 # Standard Libraries
