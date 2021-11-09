@@ -23,7 +23,8 @@ def manhattan(curr_state, goal_state, w):
 
     # Iterate through curr_state
     for i in range(len(curr_state)):
-
+        if curr_state[i] == 0:
+            continue
         # Iterate through goal_state to find match
         for j in range(len(goal_state)):
 
@@ -37,6 +38,9 @@ def manhattan(curr_state, goal_state, w):
 
                 # Add to total mdist
                 mdist += abs(x2 - x1) + abs(y2 - y1)
+
+                # Break loop to go to next tile
+                break
 
     return mdist * w
 
