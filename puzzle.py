@@ -156,7 +156,7 @@ def find_path(node):
 	sol_path = []
 	fn_vals = []
 
-	# Go up solution path while appending action to sol_path until root
+	# Go up solution path while appending action to sol_path and f(n) to fn_vals until root
 	curr = node
 	while curr.depth != 0:
 		sol_path.append(curr.action)
