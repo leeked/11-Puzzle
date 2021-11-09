@@ -46,6 +46,7 @@ def manhattan(curr_state, goal_state, w):
 
 
 # Create and return a list of possible actions from given state
+# Used in expand()
 def expand_actions(state):
     poss_actions = []
 
@@ -73,6 +74,7 @@ def expand_actions(state):
 
 
 # Create new state based on action
+# Used in expand()
 def result(state, action):
     new_s = copy.deepcopy(state)
 
@@ -118,7 +120,7 @@ def expand(parent, goal_state, w):
         yield Node.Node(new_depth, gn, fn, new_s, parent, action)
 
 
-# Search
+# A* Search
 def search(ini_state, goal_state, w):
     # Initialize Root Node
     node = Node.Node(0, 0, manhattan(ini_state, goal_state, w), ini_state)
@@ -154,6 +156,7 @@ def search(ini_state, goal_state, w):
 
 
 # Explore solution path and return actions and f(n) along the path
+# Used in output()
 def find_path(node):
     sol_path = []
     fn_vals = []
