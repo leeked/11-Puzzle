@@ -1,3 +1,13 @@
+"""
+CS-UY 4613
+Source Code for Project 1: 11-Puzzle Problem
+
+Author: Kevin Lee (KL3642)
+
+Description: This is the Node data structure used in the project.
+"""
+
+
 class Node:
     def __init__(self, depth=0, path_cost=0, total_cost=0, state=None, parent=None, action=None):
         if state is None:
