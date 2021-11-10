@@ -337,7 +337,8 @@ class Node:
 ## Output Files
 
 output1a.txt
-```2 0 6 4
+```
+2 0 6 4
 3 10 7 9
 11 5 8 1
 
