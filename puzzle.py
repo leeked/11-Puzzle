@@ -150,7 +150,7 @@ def search(ini_state, goal_state, w):
                 visited[tuple(s)] = child
                 heappush(frontier, child)
 
-            total_num_nodes += 1
+                total_num_nodes += 1
 
     return None, total_num_nodes
 
